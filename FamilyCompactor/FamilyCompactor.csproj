@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>
+      None
+    </ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug2019</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{571122B7-2BC7-41C7-93CE-61344E79E9AB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FamilyCompactor</RootNamespace>
+    <AssemblyName>FamilyCompactor</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug2019|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug$([System.Text.RegularExpressions.Regex]::Match($(Configuration), `[0-9]\d*`))\FamilyCompactor</OutputPath>
+    <DefineConstants>DEBUG;TRACE;REVIT$([System.Text.RegularExpressions.Regex]::Match($(Configuration), `[0-9]\d*`))</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <StartAction>Program</StartAction>
+    <StartProgram>$(ProgramW6432)\Autodesk\Revit $([System.Text.RegularExpressions.Regex]::Match($(Configuration), `[0-9]\d*`))\Revit.exe</StartProgram>
+    <StartArguments>"o:\SD\source\repos\FamilyCompactor\FamilyCompactor\bin\Debug2019\journal.0001easyexample.txt"</StartArguments>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release2019|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release$([System.Text.RegularExpressions.Regex]::Match($(Configuration), `[0-9]\d*`))\FamilyCompactor</OutputPath>
+    <DefineConstants>TRACE;REVIT$([System.Text.RegularExpressions.Regex]::Match($(Configuration), `[0-9]\d*`))</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <StartAction>Program</StartAction>
+    <StartProgram>$(ProgramW6432)\Autodesk\Revit $([System.Text.RegularExpressions.Regex]::Match($(Configuration), `[0-9]\d*`))\Revit.exe</StartProgram>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug2021|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug$([System.Text.RegularExpressions.Regex]::Match($(Configuration), `[0-9]\d*`))\FamilyCompactor</OutputPath>
+    <DefineConstants>DEBUG;TRACE;REVIT$([System.Text.RegularExpressions.Regex]::Match($(Configuration), `[0-9]\d*`))</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <StartAction>Program</StartAction>
+    <StartProgram>$(ProgramW6432)\Autodesk\Revit $([System.Text.RegularExpressions.Regex]::Match($(Configuration), `[0-9]\d*`))\Revit.exe</StartProgram>
+    <StartArguments>"o:\SD\source\repos\FamilyCompactor\FamilyCompactor\bin\Debug2021\journal.0001easyexample.txt"</StartArguments>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release2021|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release$([System.Text.RegularExpressions.Regex]::Match($(Configuration), `[0-9]\d*`))\FamilyCompactor</OutputPath>
+    <DefineConstants>TRACE;REVIT$([System.Text.RegularExpressions.Regex]::Match($(Configuration), `[0-9]\d*`))</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <StartAction>Program</StartAction>
+    <StartProgram>$(ProgramW6432)\Autodesk\Revit $([System.Text.RegularExpressions.Regex]::Match($(Configuration), `[0-9]\d*`))\Revit.exe</StartProgram>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="RevitAPI">
+      <HintPath>$(ProgramW6432)\Autodesk\Revit $([System.Text.RegularExpressions.Regex]::Match($(Configuration), `[0-9]\d*`))\RevitAPI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="RevitAPIUI">
+      <HintPath>$(ProgramW6432)\Autodesk\Revit $([System.Text.RegularExpressions.Regex]::Match($(Configuration), `[0-9]\d*`))\RevitAPIUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App.cs" />
+    <Compile Include="Command.cs" />
+    <Compile Include="FileOpenWindow.xaml.cs">
+      <DependentUpon>FileOpenWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="FamilyCompactor.addin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="Icon16.png" />
+    <Resource Include="Icon32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="FileOpenWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <Target Name="BeforeBuild">
+    <Exec Condition="$(Configuration.Contains('Debug'))" Command="copy $(SolutionDir)journal.0001easyexample.txt $(ProjectDir)bin\$(Configuration)\FamilyCompactor" />
+    <Exec Command="copy $(ProjectDir)$(TargetName).addin $(ProjectDir)bin\$(Configuration)" />
+    <Exec Command="copy $(SolutionDir)Clean$([System.Text.RegularExpressions.Regex]::Match($(Configuration), `[0-9]\d*`)).rte $(ProjectDir)bin\$(Configuration)\FamilyCompactor" />
+  </Target>
+  <Target Name="AfterClean">
+    <Delete Files="$(AppData)\Autodesk\REVIT\Addins\$([System.Text.RegularExpressions.Regex]::Match($(Configuration), `[0-9]\d*`))\FamilyCompactor.addin" />
+    <Delete Files="$(AppData)\Autodesk\REVIT\Addins\$([System.Text.RegularExpressions.Regex]::Match($(Configuration), `[0-9]\d*`))\FamilyCompactor.dll" />
+  </Target>
+</Project>

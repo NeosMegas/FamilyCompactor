@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>
+	<AddIn Type="Application">
+		<Name>FamilyCompactor</Name>
+		<Assembly>FamilyCompactor\FamilyCompactor.dll</Assembly>
+		<FullClassName>FamilyCompactor.App</FullClassName>
+		<ClientId>0413184f-3308-44d8-ab63-9fa2efae7594</ClientId>
+		<VendorId>Valiev Alexander</VendorId>
+		<VendorDescription>an.valiev@72list.ru</VendorDescription>
+	</AddIn>
+</RevitAddIns>

@@ -1,0 +1,32 @@
+﻿<Window x:Class="FamilyCompactor.FileOpenWindow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FamilyCompactor"
+             mc:Ignorable="d" 
+             d:DesignHeight="225" d:DesignWidth="400"
+                Height="225"
+                Width="400"
+        FocusManager.FocusedElement="{Binding ElementName=txtFileNames}"
+        WindowStartupLocation="CenterScreen"
+        >
+
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="9*"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <TextBox x:Name="txtFileNames" TextWrapping="Wrap" AcceptsReturn="True" Margin="5" />
+        <UniformGrid Rows="1" Grid.Row="1">
+            <Button x:Name = "btnBrowse" Content="Обзор..." Click="btnBrowse_Click"/>
+            <Button x:Name = "btnOk" Content="OK" IsDefault="True" Click="btnOk_Click"/>
+            <Button x:Name = "btnCancel" Content="Отмена" IsCancel="True"/>
+        </UniformGrid>
+    </Grid>
+</Window>
