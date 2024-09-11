@@ -29,10 +29,17 @@ namespace FamilyCompactor
             get { return filesList; }
         }
 
-        public FileOpenWindow(string title)
+        public FileOpenWindow(string title, string lang)
         {
             InitializeComponent();
             Title = title;
+            DataObject.AddPastingHandler(txtFileNames, txtFileNames_OnPaste);
+            Resources.MergedDictionaries.Clear();
+            ResourceDictionary rd = new ResourceDictionary()
+            {
+                Source = new Uri($@"pack://application:,,,/{System.Reflection.Assembly.GetExecutingAssembly().GetName().Name};component/Resources/{lang.ToLower()}.xaml", UriKind.RelativeOrAbsolute)
+            };
+            Resources.MergedDictionaries.Add(rd);
         }
 
         private void btnBrowse_Click(object sender, RoutedEventArgs e)
@@ -44,21 +51,30 @@ namespace FamilyCompactor
                 CheckFileExists = true
             };
             if(ofd.ShowDialog(this) == true)
+            {
                 foreach(string fileName in ofd.FileNames)
                     txtFileNames.Text += fileName + '\n';
+                btnOk.Focus();
+            }    
         }
 
         private void btnOk_Click(object sender, RoutedEventArgs e)
         {
             txtFileNames.Text = txtFileNames.Text.Replace("\r\n", "\n");
-            string[] lines = txtFileNames.Text.Split('\n');
+            string[] lines = txtFileNames.Text.Split(new[] { '\n'}, StringSplitOptions.RemoveEmptyEntries);
             foreach(string line in lines)
                 filesList.Add(line);
             if (filesList.Count > 0)
                 DialogResult = true;
             else
                 DialogResult = false;
-            //Close();
         }
+
+        private void txtFileNames_OnPaste(object sender, DataObjectPastingEventArgs e)
+        {
+            if (e.SourceDataObject.GetDataPresent(DataFormats.Text, true))
+                btnOk.Focus();
+        }
+
     }
 }

@@ -13,20 +13,23 @@
         >
 
     <Window.Resources>
-        <Style TargetType="Button">
-            <Setter Property="Margin" Value="5"/>
-        </Style>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources\en.xaml"/>
+                <ResourceDictionary Source="Resources\ru.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="9*"/>
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
-        <TextBox x:Name="txtFileNames" TextWrapping="Wrap" AcceptsReturn="True" Margin="5" />
+        <TextBox x:Name="txtFileNames" TextWrapping="Wrap" AcceptsReturn="True" Margin="5" ToolTip="{DynamicResource ResourceKey=TextBoxToolTip}" />
         <UniformGrid Rows="1" Grid.Row="1">
-            <Button x:Name = "btnBrowse" Content="Обзор..." Click="btnBrowse_Click"/>
-            <Button x:Name = "btnOk" Content="OK" IsDefault="True" Click="btnOk_Click"/>
-            <Button x:Name = "btnCancel" Content="Отмена" IsCancel="True"/>
+            <Button x:Name = "btnBrowse" Content="{DynamicResource ResourceKey=Browse}" Click="btnBrowse_Click" ToolTip="{DynamicResource ResourceKey=BrowseToolTip}" Margin="5"/>
+            <Button x:Name = "btnOk" Content="OK" IsDefault="True" Click="btnOk_Click" Margin="5"/>
+            <Button x:Name = "btnCancel" Content="{DynamicResource ResourceKey=Cancel}" IsCancel="True" Margin="5"/>
         </UniformGrid>
     </Grid>
 </Window>

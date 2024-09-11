@@ -1,0 +1,9 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:System="clr-namespace:System;assembly=mscorlib">
+    <System:String x:Key="Language_Code">ru</System:String>
+    <System:String x:Key="Cancel">Отмена</System:String>
+	<System:String x:Key="Browse">Обзор...</System:String>
+    <System:String x:Key="TextBoxToolTip">Сюда можно вставить список путей к семействам. Разделитель - новая строка.</System:String>
+    <System:String x:Key="BrowseToolTip">Выбранные файлы будут добавлены в список выше.</System:String>
+</ResourceDictionary>

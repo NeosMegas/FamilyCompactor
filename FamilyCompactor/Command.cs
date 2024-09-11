@@ -12,6 +12,8 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Microsoft.VisualBasic;
 using System.Reflection;
+using System.Globalization;
+using System.Resources;
 #endregion
 
 namespace FamilyCompactor
@@ -29,18 +31,38 @@ namespace FamilyCompactor
         string projectTemplateFileName = Path.Combine(Path.GetDirectoryName(Uri.UnescapeDataString((new UriBuilder(Assembly.GetExecutingAssembly().CodeBase).Path))), "Clean2020.rte");
 #elif REVIT2021
         string projectTemplateFileName = Path.Combine(Path.GetDirectoryName(Uri.UnescapeDataString((new UriBuilder(Assembly.GetExecutingAssembly().CodeBase).Path))), "Clean2021.rte");
+#elif REVIT2022
+        string projectTemplateFileName = Path.Combine(Path.GetDirectoryName(Uri.UnescapeDataString((new UriBuilder(Assembly.GetExecutingAssembly().CodeBase).Path))), "Clean2022.rte");
+#elif REVIT2023
+        string projectTemplateFileName = Path.Combine(Path.GetDirectoryName(Uri.UnescapeDataString((new UriBuilder(Assembly.GetExecutingAssembly().CodeBase).Path))), "Clean2023.rte");
+#elif REVIT2024
+        string projectTemplateFileName = Path.Combine(Path.GetDirectoryName(Uri.UnescapeDataString((new UriBuilder(Assembly.GetExecutingAssembly().CodeBase).Path))), "Clean2024.rte");
+#elif REVIT2025
+        string projectTemplateFileName = Path.Combine(Path.GetDirectoryName(Uri.UnescapeDataString((new UriBuilder(Assembly.GetExecutingAssembly().CodeBase).Path))), "Clean2025.rte");
 #endif
+
+        ResourceManager rm = new ResourceManager($"{nameof(FamilyCompactor)}.Resources.strings", typeof(Command).Assembly);
+        CultureInfo ci;
+        string cultureName = "en";
+
         public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
             uiApp = commandData.Application;
             app = uiApp.Application;
+            
+            if (app.Language == LanguageType.English_USA ||
+                app.Language == LanguageType.English_GB ||
+                app.Language == LanguageType.Russian)
+                cultureName = app.Language.ToString().Substring(0, 2);
+            ci = CultureInfo.CreateSpecificCulture(cultureName);
+
             //uiDoc = uiApp.ActiveUIDocument;
             //doc = uiDoc.Document;
 
             //string test = Interaction.InputBox("Enter family paths (; - separator)");
             //string fileName = GetNextBackupFilePath(test);
             //TaskDialog.Show("1", fileName);
-            
+
             CompactFamily();
 
             return Result.Succeeded;
@@ -50,7 +72,7 @@ namespace FamilyCompactor
         {
             try
             {
-                FileOpenWindow fow = new FileOpenWindow($"Family compactor v{Assembly.GetExecutingAssembly().GetName().Version}");
+                FileOpenWindow fow = new FileOpenWindow($"Family compactor v{Assembly.GetExecutingAssembly().GetName().Version}", cultureName);
                 if (fow.ShowDialog() == false) return;
                 //string listOfFamilies = Microsoft.VisualBasic.Interaction.InputBox("Enter family paths (; - separator)");
                 //if (listOfFamilies == "") return;
@@ -69,21 +91,27 @@ namespace FamilyCompactor
                     {
                         if (CompactFamily(s, ref profit))
                         {
-                            s1 += "\"" + fileNameWithoutExtension + "\" compacted by " + profit + " bytes.\n";
+                            //s1 += "\"" + fileNameWithoutExtension + "\" compacted by " + profit + " bytes.\n";
+                            //s1 += "\"" + fileNameWithoutExtension + "\" уменьшено на " + profit + " байт.\n";
+                            s1 += String.Format(rm.GetString("FamilyCompactedBy", ci), fileNameWithoutExtension, profit) + '\n';
                             i++;
                         }
                         else
-                            s1 += "\"" + fileNameWithoutExtension + "\" could not be compacted.\n";
+                            //s1 += "\"" + fileNameWithoutExtension + "\" could not be compacted.\n";
+                            //s1 += "\"" + fileNameWithoutExtension + "\" не может быть уменьшено.\n";
+                            s1 += String.Format(rm.GetString("FamilyCouldntBeCompacted", ci), fileNameWithoutExtension) + '\n';
                     }
                     else
-                        s1 += "\"" + fileNameWithoutExtension + "\" should be closed before compacting.\n";
+                        //s1 += "\"" + fileNameWithoutExtension + "\" should be closed before compacting.\n";
+                        //s1 += "\"" + fileNameWithoutExtension + "\" нужно закрыть перед обработкой.\n";
+                        s1 += String.Format(rm.GetString("FamilyShoulBeClosed", ci), fileNameWithoutExtension) + '\n';
                 };
-                s1 += i + " families compacted.";
-                TaskDialog.Show("CompactFamily", s1);
+                s1 += String.Format(rm.GetString("FilesCompacted", ci), i);
+                TaskDialog.Show(nameof(FamilyCompactor), s1);
             }
             catch (Exception ex)
             {
-                TaskDialog.Show("CompactFamily", ex.ToString());
+                TaskDialog.Show(nameof(FamilyCompactor), ex.ToString());
             }
         }
 
@@ -105,10 +133,10 @@ namespace FamilyCompactor
                 // Пробуем уменьшить размер, сохранив семейство под другим именем
                 if (!File.Exists(familyPath)) return false;
                 familyDocToSaveAs = app.OpenDocumentFile(familyPath);
-                if (familyDocToSaveAs == null) throw new Exception("Error opening family.");
+                if (familyDocToSaveAs == null) throw new Exception(rm.GetString("ErrorOpeningFamily", ci));
                 familyDocToSaveAs.SaveAs(tempFamilyPath1, new SaveAsOptions() { Compact = true });
                 familyDocToSaveAs.Close(false);
-                if (!File.Exists(tempFamilyPath1)) throw new Exception("Error saving family.");
+                if (!File.Exists(tempFamilyPath1)) throw new Exception(rm.GetString("ErrorSavingFamily", ci));
 
 
                 File.Copy(familyPath, tempFamilyPath2);
@@ -117,7 +145,7 @@ namespace FamilyCompactor
                 //string tempTxtPath = string.Empty; // Путь к временной резервной копии файла каталога типов
 
                 projectDoc = app.NewProjectDocument(projectTemplateFileName);
-                if (projectDoc == null) throw new Exception("Error creating project document.");
+                if (projectDoc == null) throw new Exception(rm.GetString("ErrorСreatingProjectDocument", ci));
 
                 // Если файл каталога типов существует, временно переименовать его, чтоб они не грузились в проект
                 //				int i = 0;
@@ -138,7 +166,7 @@ namespace FamilyCompactor
                 t = new Transaction(projectDoc, "CompactFamily");
                 t.Start();
                 //if (!projectDoc.LoadFamily(familyPath, new FamilyLoadOptions(), out loadedFamily)) throw new Exception("Error loading family");
-                if (!projectDoc.LoadFamily(tempFamilyPath2, new FamilyLoadOptions(), out Family loadedFamily)) throw new Exception("Error loading family");
+                if (!projectDoc.LoadFamily(tempFamilyPath2, new FamilyLoadOptions(), out Family loadedFamily)) throw new Exception(rm.GetString("ErrorLoadingFamily", ci));
                 t.Commit();
                 Document familyDoc = projectDoc.EditFamily(loadedFamily);
                 familyDoc?.Save(new SaveOptions() { Compact = true });
@@ -153,7 +181,7 @@ namespace FamilyCompactor
                 if (profit > 0)
                 {
                     string backupCopyFilePath = GetNextBackupFilePath(familyPath);
-                    if (string.IsNullOrEmpty(backupCopyFilePath)) throw new Exception("Error creating backup file.");
+                    if (string.IsNullOrEmpty(backupCopyFilePath)) throw new Exception(rm.GetString("ErrorCreatingBackupFile", ci));
                     File.Move(familyPath, backupCopyFilePath);
                     if (profit1 >= profit2)
                     {
@@ -289,7 +317,7 @@ namespace FamilyCompactor
             }
             result = Path.Combine(directory, result + fileExtension);
             if (File.Exists(result))
-                throw new Exception("Error creating backup copy.");
+                throw new Exception(rm.GetString("ErrorCreatingBackupFile", ci));
             return result;
         }
 

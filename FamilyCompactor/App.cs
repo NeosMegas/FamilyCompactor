@@ -5,7 +5,11 @@ using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Globalization;
 using System.Reflection;
+using System.Resources;
+using System.Windows;
 using System.Windows.Media.Imaging;
 
 #endregion
@@ -16,6 +20,8 @@ namespace FamilyCompactor
     {
         static AddInId addInId = new AddInId(new Guid("0413184f-3308-44d8-ab63-9fa2efae7594"));
         string helpURL = "https://google.com";
+        ResourceManager rm = new ResourceManager($"{nameof(FamilyCompactor)}.Resources.strings", typeof(App).Assembly);
+        CultureInfo ci;
 
         public RibbonPanel AutomationPanel(UIControlledApplication application, string tabName = "", RibbonPanel ribbonPanel = null)
         {
@@ -27,11 +33,17 @@ namespace FamilyCompactor
                 else
                     ribbonPanel = application.CreateRibbonPanel(tabName, "FamilyCompactor");
             }
-            AddButton(ribbonPanel, "Compact families", assemblyPath, GetType().Namespace + "." + nameof(Command), $"Try to compact family file size.\nv{Assembly.GetExecutingAssembly().GetName().Version}");
+            AddButton(ribbonPanel,
+                    "Compact families",
+                    assemblyPath,
+                    GetType().Namespace + "." + nameof(Command),
+                    rm.GetString("CommandToolTip", ci) + 
+                    $"\nv{Assembly.GetExecutingAssembly().GetName().Version}",
+                    rm.GetString("CommandLongDescription", ci));
             return ribbonPanel;
         }
 
-        private void AddButton(RibbonPanel ribbonPanel, string buttonName, string path, string linkToCommand, string toolTip)
+        private void AddButton(RibbonPanel ribbonPanel, string buttonName, string path, string linkToCommand, string toolTip, string longDescription)
         {
             PushButtonData buttonData = new PushButtonData(
                buttonName,
@@ -42,6 +54,7 @@ namespace FamilyCompactor
             buttonData.SetContextualHelp(contextualHelp);
             PushButton button = ribbonPanel.AddItem(buttonData) as PushButton;
             button.ToolTip = toolTip;
+            button.LongDescription = longDescription;
             button.AvailabilityClassName = typeof(TrueAvailability).Namespace + "." + nameof(TrueAvailability);
             button.LargeImage = new BitmapImage(new Uri($@"pack://application:,,,/{System.Reflection.Assembly.GetExecutingAssembly().GetName().Name};component/Icon32.png", UriKind.RelativeOrAbsolute));
             button.Image = new BitmapImage(new Uri($@"pack://application:,,,/{System.Reflection.Assembly.GetExecutingAssembly().GetName().Name};component/Icon16.png", UriKind.RelativeOrAbsolute));
@@ -49,6 +62,13 @@ namespace FamilyCompactor
 
         public Result OnStartup(UIControlledApplication a)
         {
+            string cultureName = "en";
+            if (a.ControlledApplication.Language == LanguageType.English_USA ||
+                a.ControlledApplication.Language == LanguageType.English_GB ||
+                a.ControlledApplication.Language == LanguageType.Russian)
+                cultureName = a.ControlledApplication.Language.ToString().Substring(0, 2);
+            ci = CultureInfo.CreateSpecificCulture(cultureName);
+
             RibbonPanel ribbonPanel = AutomationPanel(a);
 
             return Result.Succeeded;

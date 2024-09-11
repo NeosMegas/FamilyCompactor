@@ -1,0 +1,9 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:System="clr-namespace:System;assembly=mscorlib">
+    <System:String x:Key="Language_Code">en</System:String>
+    <System:String x:Key="Cancel">Cancel</System:String>
+	<System:String x:Key="Browse">Browse...</System:String>
+    <System:String x:Key="TextBoxToolTip">You can insert a list of family paths here. The separator is a new line.</System:String>
+    <System:String x:Key="BrowseToolTip">The selected files will be added to the list above.</System:String>
+</ResourceDictionary>

@@ -15,7 +15,6 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>FamilyCompactor</RootNamespace>
     <AssemblyName>FamilyCompactor</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug2019|AnyCPU' ">
@@ -29,9 +28,33 @@
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <StartAction>Program</StartAction>
     <StartProgram>$(ProgramW6432)\Autodesk\Revit $([System.Text.RegularExpressions.Regex]::Match($(Configuration), `[0-9]\d*`))\Revit.exe</StartProgram>
-    <StartArguments>"o:\SD\source\repos\FamilyCompactor\FamilyCompactor\bin\Debug2019\journal.0001easyexample.txt"</StartArguments>
+    <StartArguments>"o:\source\repos\FamilyCompactor\FamilyCompactor\bin\Debug2019\journal.0001easyexample.txt"</StartArguments>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release2019|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release$([System.Text.RegularExpressions.Regex]::Match($(Configuration), `[0-9]\d*`))\FamilyCompactor</OutputPath>
+    <DefineConstants>TRACE;REVIT$([System.Text.RegularExpressions.Regex]::Match($(Configuration), `[0-9]\d*`))</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <StartAction>Program</StartAction>
+    <StartProgram>$(ProgramW6432)\Autodesk\Revit $([System.Text.RegularExpressions.Regex]::Match($(Configuration), `[0-9]\d*`))\Revit.exe</StartProgram>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug2020|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug$([System.Text.RegularExpressions.Regex]::Match($(Configuration), `[0-9]\d*`))\FamilyCompactor</OutputPath>
+    <DefineConstants>DEBUG;TRACE;REVIT$([System.Text.RegularExpressions.Regex]::Match($(Configuration), `[0-9]\d*`))</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <StartAction>Program</StartAction>
+    <StartProgram>$(ProgramW6432)\Autodesk\Revit $([System.Text.RegularExpressions.Regex]::Match($(Configuration), `[0-9]\d*`))\Revit.exe</StartProgram>
+    <StartArguments>"o:\source\repos\FamilyCompactor\FamilyCompactor\bin\Debug2020\journal.0001easyexample.txt"</StartArguments>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release2020|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release$([System.Text.RegularExpressions.Regex]::Match($(Configuration), `[0-9]\d*`))\FamilyCompactor</OutputPath>
@@ -53,7 +76,7 @@
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <StartAction>Program</StartAction>
     <StartProgram>$(ProgramW6432)\Autodesk\Revit $([System.Text.RegularExpressions.Regex]::Match($(Configuration), `[0-9]\d*`))\Revit.exe</StartProgram>
-    <StartArguments>"o:\SD\source\repos\FamilyCompactor\FamilyCompactor\bin\Debug2021\journal.0001easyexample.txt"</StartArguments>
+    <StartArguments>"o:\source\repos\FamilyCompactor\FamilyCompactor\bin\Debug2021\journal.0001easyexample.txt"</StartArguments>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release2021|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -63,6 +86,102 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <StartAction>Program</StartAction>
+    <StartProgram>$(ProgramW6432)\Autodesk\Revit $([System.Text.RegularExpressions.Regex]::Match($(Configuration), `[0-9]\d*`))\Revit.exe</StartProgram>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug2022|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug$([System.Text.RegularExpressions.Regex]::Match($(Configuration), `[0-9]\d*`))\FamilyCompactor</OutputPath>
+    <DefineConstants>DEBUG;TRACE;REVIT$([System.Text.RegularExpressions.Regex]::Match($(Configuration), `[0-9]\d*`))</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <StartAction>Program</StartAction>
+    <StartProgram>$(ProgramW6432)\Autodesk\Revit $([System.Text.RegularExpressions.Regex]::Match($(Configuration), `[0-9]\d*`))\Revit.exe</StartProgram>
+    <StartArguments>"o:\source\repos\FamilyCompactor\FamilyCompactor\bin\Debug2022\journal.0001easyexample.txt"</StartArguments>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release2022|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release$([System.Text.RegularExpressions.Regex]::Match($(Configuration), `[0-9]\d*`))\FamilyCompactor</OutputPath>
+    <DefineConstants>TRACE;REVIT$([System.Text.RegularExpressions.Regex]::Match($(Configuration), `[0-9]\d*`))</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <StartAction>Program</StartAction>
+    <StartProgram>$(ProgramW6432)\Autodesk\Revit $([System.Text.RegularExpressions.Regex]::Match($(Configuration), `[0-9]\d*`))\Revit.exe</StartProgram>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug2023|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug$([System.Text.RegularExpressions.Regex]::Match($(Configuration), `[0-9]\d*`))\FamilyCompactor</OutputPath>
+    <DefineConstants>DEBUG;TRACE;REVIT$([System.Text.RegularExpressions.Regex]::Match($(Configuration), `[0-9]\d*`))</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <StartAction>Program</StartAction>
+    <StartProgram>$(ProgramW6432)\Autodesk\Revit $([System.Text.RegularExpressions.Regex]::Match($(Configuration), `[0-9]\d*`))\Revit.exe</StartProgram>
+    <StartArguments>"o:\source\repos\FamilyCompactor\FamilyCompactor\bin\Debug2023\journal.0001easyexample.txt"</StartArguments>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release2023|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release$([System.Text.RegularExpressions.Regex]::Match($(Configuration), `[0-9]\d*`))\FamilyCompactor</OutputPath>
+    <DefineConstants>TRACE;REVIT$([System.Text.RegularExpressions.Regex]::Match($(Configuration), `[0-9]\d*`))</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <StartAction>Program</StartAction>
+    <StartProgram>$(ProgramW6432)\Autodesk\Revit $([System.Text.RegularExpressions.Regex]::Match($(Configuration), `[0-9]\d*`))\Revit.exe</StartProgram>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug2024|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug$([System.Text.RegularExpressions.Regex]::Match($(Configuration), `[0-9]\d*`))\FamilyCompactor</OutputPath>
+    <DefineConstants>DEBUG;TRACE;REVIT$([System.Text.RegularExpressions.Regex]::Match($(Configuration), `[0-9]\d*`))</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <StartAction>Program</StartAction>
+    <StartProgram>$(ProgramW6432)\Autodesk\Revit $([System.Text.RegularExpressions.Regex]::Match($(Configuration), `[0-9]\d*`))\Revit.exe</StartProgram>
+    <StartArguments>"o:\source\repos\FamilyCompactor\FamilyCompactor\bin\Debug2024\journal.0001easyexample.txt"</StartArguments>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release2024|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release$([System.Text.RegularExpressions.Regex]::Match($(Configuration), `[0-9]\d*`))\FamilyCompactor</OutputPath>
+    <DefineConstants>TRACE;REVIT$([System.Text.RegularExpressions.Regex]::Match($(Configuration), `[0-9]\d*`))</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <StartAction>Program</StartAction>
+    <StartProgram>$(ProgramW6432)\Autodesk\Revit $([System.Text.RegularExpressions.Regex]::Match($(Configuration), `[0-9]\d*`))\Revit.exe</StartProgram>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug2025|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug$([System.Text.RegularExpressions.Regex]::Match($(Configuration), `[0-9]\d*`))\FamilyCompactor</OutputPath>
+    <DefineConstants>DEBUG;TRACE;REVIT$([System.Text.RegularExpressions.Regex]::Match($(Configuration), `[0-9]\d*`))</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TargetFrameworkVersion>v8.0</TargetFrameworkVersion>
+    <StartAction>Program</StartAction>
+    <StartProgram>$(ProgramW6432)\Autodesk\Revit $([System.Text.RegularExpressions.Regex]::Match($(Configuration), `[0-9]\d*`))\Revit.exe</StartProgram>
+    <StartArguments>"o:\source\repos\FamilyCompactor\FamilyCompactor\bin\Debug2025\journal.0001easyexample.txt"</StartArguments>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release2025|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release$([System.Text.RegularExpressions.Regex]::Match($(Configuration), `[0-9]\d*`))\FamilyCompactor</OutputPath>
+    <DefineConstants>TRACE;REVIT$([System.Text.RegularExpressions.Regex]::Match($(Configuration), `[0-9]\d*`))</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TargetFrameworkVersion>v8.0</TargetFrameworkVersion>
     <StartAction>Program</StartAction>
     <StartProgram>$(ProgramW6432)\Autodesk\Revit $([System.Text.RegularExpressions.Regex]::Match($(Configuration), `[0-9]\d*`))\Revit.exe</StartProgram>
   </PropertyGroup>
@@ -91,9 +210,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="FamilyCompactor.addin">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <Content Include="FamilyCompactor.addin" />
     <Resource Include="Icon16.png" />
     <Resource Include="Icon32.png" />
   </ItemGroup>
@@ -102,6 +219,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Resources\en.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\ru.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\strings.ru.resx" />
+    <EmbeddedResource Include="Resources\strings.en.resx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
@@ -116,7 +245,7 @@
   </Target>
   -->
   <Target Name="BeforeBuild">
-    <Exec Condition="$(Configuration.Contains('Debug'))" Command="copy $(SolutionDir)journal.0001easyexample.txt $(ProjectDir)bin\$(Configuration)\FamilyCompactor" />
+    <Exec Condition="$(Configuration.Contains('Debug'))" Command="copy $(SolutionDir)journal.0001easyexample.txt $(ProjectDir)bin\$(Configuration)" />
     <Exec Command="copy $(ProjectDir)$(TargetName).addin $(ProjectDir)bin\$(Configuration)" />
     <Exec Command="copy $(SolutionDir)Clean$([System.Text.RegularExpressions.Regex]::Match($(Configuration), `[0-9]\d*`)).rte $(ProjectDir)bin\$(Configuration)\FamilyCompactor" />
   </Target>

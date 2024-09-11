@@ -361,4 +361,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
-/FamilyCompactor.Installer/FamilyCompactor.Installer.csproj
+/FamilyCompactor.Installer/
+/icons/
