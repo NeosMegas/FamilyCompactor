@@ -204,6 +204,10 @@
   <ItemGroup>
     <Compile Include="App.cs" />
     <Compile Include="Command.cs" />
+    <Compile Include="FamilyCleaner\CleaningManager\CleaningManager.cs" />
+    <Compile Include="FamilyCleaner\Open\FailureProcessor.cs" />
+    <Compile Include="FamilyCleaner\Open\FamilyOpener.cs" />
+    <Compile Include="FamilyCleaner\Worker\Worker.cs" />
     <Compile Include="FileOpenWindow.xaml.cs">
       <DependentUpon>FileOpenWindow.xaml</DependentUpon>
     </Compile>
