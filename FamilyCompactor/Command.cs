@@ -92,18 +92,18 @@ namespace FamilyCompactor
                         if (CompactFamily(s, ref profit))
                         {
                             //s1 += "\"" + fileNameWithoutExtension + "\" compacted by " + profit + " bytes.\n";
-                            //s1 += "\"" + fileNameWithoutExtension + "\" уменьшено на " + profit + " байт.\n";
+                            //s1 += "\"" + fileNameWithoutExtension + "\" пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ " + profit + " пїЅпїЅпїЅпїЅ.\n";
                             s1 += String.Format(rm.GetString("FamilyCompactedBy", ci), fileNameWithoutExtension, profit) + '\n';
                             i++;
                         }
                         else
                             //s1 += "\"" + fileNameWithoutExtension + "\" could not be compacted.\n";
-                            //s1 += "\"" + fileNameWithoutExtension + "\" не может быть уменьшено.\n";
+                            //s1 += "\"" + fileNameWithoutExtension + "\" пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.\n";
                             s1 += String.Format(rm.GetString("FamilyCouldntBeCompacted", ci), fileNameWithoutExtension) + '\n';
                     }
                     else
                         //s1 += "\"" + fileNameWithoutExtension + "\" should be closed before compacting.\n";
-                        //s1 += "\"" + fileNameWithoutExtension + "\" нужно закрыть перед обработкой.\n";
+                        //s1 += "\"" + fileNameWithoutExtension + "\" пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.\n";
                         s1 += String.Format(rm.GetString("FamilyShoulBeClosed", ci), fileNameWithoutExtension) + '\n';
                 };
                 s1 += String.Format(rm.GetString("FilesCompacted", ci), i);
@@ -130,7 +130,7 @@ namespace FamilyCompactor
 
             try
             {
-                // Пробуем уменьшить размер, сохранив семейство под другим именем
+                // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
                 if (!File.Exists(familyPath)) return false;
                 familyDocToSaveAs = app.OpenDocumentFile(familyPath);
                 if (familyDocToSaveAs == null) throw new Exception(rm.GetString("ErrorOpeningFamily", ci));
@@ -141,27 +141,27 @@ namespace FamilyCompactor
 
                 File.Copy(familyPath, tempFamilyPath2);
                 if (!File.Exists(tempFamilyPath2)) return false;
-                //string txtPath = Path.ChangeExtension(familyPath, "txt"); // Путь к файлу каталога типов
-                //string tempTxtPath = string.Empty; // Путь к временной резервной копии файла каталога типов
+                //string txtPath = Path.ChangeExtension(familyPath, "txt"); // пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+                //string tempTxtPath = string.Empty; // пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 
                 projectDoc = app.NewProjectDocument(projectTemplateFileName);
-                if (projectDoc == null) throw new Exception(rm.GetString("ErrorСreatingProjectDocument", ci));
+                if (projectDoc == null) throw new Exception(rm.GetString("ErrorпїЅreatingProjectDocument", ci));
 
-                // Если файл каталога типов существует, временно переименовать его, чтоб они не грузились в проект
-                //				int i = 0;
-                //				if (File.Exists(txtPath))
-                //					tempTxtPath = txtPath + "_temp.txt";
-                //				while (File.Exists(tempTxtPath) && i < 9) {
-                //					tempTxtPath = txtPath + "_temp" + i.ToString() + ".txt";
-                //					i++;
-                //				}
-                //				if (File.Exists(tempTxtPath))
-                //					throw new Exception("Error creating txt backup file");
-                //				if (File.Exists(txtPath))
-                //					File.Move(txtPath, tempTxtPath);
-                //				if (File.Exists(txtPath))
-                //					throw new Exception("Error creating txt backup file");
-                //
+                /* пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+                				int i = 0;
+                				if (File.Exists(txtPath))
+                					tempTxtPath = txtPath + "_temp.txt";
+                				while (File.Exists(tempTxtPath) && i < 9) {
+                					tempTxtPath = txtPath + "_temp" + i.ToString() + ".txt";
+                					i++;
+                				}
+                				if (File.Exists(tempTxtPath))
+                					throw new Exception("Error creating txt backup file");
+                				if (File.Exists(txtPath))
+                					File.Move(txtPath, tempTxtPath);
+                				if (File.Exists(txtPath))
+				throw new Exception("Error creating txt backup file");
+                */
 
                 t = new Transaction(projectDoc, "CompactFamily");
                 t.Start();
