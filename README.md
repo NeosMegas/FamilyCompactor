@@ -18,7 +18,7 @@
 
 ## Установка
 
-Запустите `FamilyCompactor-1.0.0.0-Revit{версия Revit}.msi` для соответствующей версии Revit. Для установки не требуются права администратора.
+Запустите `FamilyCompactor-{x.x.x.x}-Revit{версия Revit}.msi` для соответствующей версии Revit. Для установки не требуются права администратора.
 
 ## English
 
@@ -40,4 +40,4 @@ On the **Add-ins** tab, in the **FamilyCompactor** group, click the **Compact fa
 
 ## Installation
 
-Run `FamilyCompactor-1.0.0.0-Revit{Revit version}.msi` for the appropriate Revit version. No administrator rights are required for installation.
+Run `FamilyCompactor-{x.x.x.x}-Revit{Revit version}.msi` for the appropriate Revit version. No administrator rights are required for installation.

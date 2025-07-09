@@ -210,7 +210,8 @@ namespace FamilyCompactor
                         t.RollBack();
                     try
                     {
-                        projectDoc.Close(false);
+                        if (projectDoc.IsValidObject)
+                            projectDoc.Close(false);
                     }
                     catch (Exception ex1)
                     {
@@ -223,7 +224,8 @@ namespace FamilyCompactor
                         t.RollBack();
                     try
                     {
-                        familyDocToSaveAs.Close(false);
+                        if (familyDocToSaveAs.IsValidObject)
+                            familyDocToSaveAs.Close(false);
                     }
                     catch (Exception ex1)
                     {
@@ -290,8 +292,9 @@ namespace FamilyCompactor
             //IEnumerable<string> fileNames = Directory.GetFiles(directory).Select(f => Path.GetFileNameWithoutExtension(f)).Where(s => Regex.IsMatch(s, "^" + fileNameWithoutExtension)).Where(f => f.Length == fileNameWithoutExtension.Length + 5).Where(f => Regex.IsMatch(f, @"\d{4}"));//.MaxBy(f => int.Parse(f.Substring(f.Length - 4)));
             string[] allFiles = Directory.GetFiles(directory);
             if (allFiles.Length == 0) return string.Empty;
-            IEnumerable<string> fileNamesMatchingDocumentName = allFiles.Select(f => Path.GetFileNameWithoutExtension(f)).Where(s => Regex.IsMatch(s, "^" + fileNameWithoutExtension));
-            if (!fileNamesMatchingDocumentName.Any()) return string.Empty;
+            string resultInCaseOfError = Path.Combine(directory, $"{fileNameWithoutExtension}_backup_{DateTime.Now.ToString("yyyyMMddHHmmss")}_{Guid.NewGuid()}{fileExtension}");
+            IEnumerable<string> fileNamesMatchingDocumentName = allFiles.Select(f => Path.GetFileNameWithoutExtension(f)).Where(s => s.StartsWith(fileNameWithoutExtension));
+            if (!fileNamesMatchingDocumentName.Any()) return resultInCaseOfError;
             IEnumerable<string> fileNamesMatchingDocumentNameAndLength = fileNamesMatchingDocumentName.Where(f => f.Length == fileNameWithoutExtension.Length + 5);
             string result = string.Empty;
             if (!fileNamesMatchingDocumentNameAndLength.Any())
@@ -303,7 +306,7 @@ namespace FamilyCompactor
                         result += ".0000";
                 }
                 else
-                    return string.Empty;
+                    return resultInCaseOfError;
             }
             else
             {
