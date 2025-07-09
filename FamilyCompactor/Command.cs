@@ -283,36 +283,32 @@ namespace FamilyCompactor
             return result;
         }
 
-        string GetNextBackupFilePath(string documentFileName)
+        static string GetNextBackupFilePath(string documentFileName)
         {
             string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(documentFileName);
             string fileExtension = Path.GetExtension(documentFileName);
             string directory = Path.GetDirectoryName(documentFileName) ?? string.Empty;
             if (string.IsNullOrEmpty(directory) || !Directory.Exists(directory)) return string.Empty;
-            //IEnumerable<string> fileNames = Directory.GetFiles(directory).Select(f => Path.GetFileNameWithoutExtension(f)).Where(s => Regex.IsMatch(s, "^" + fileNameWithoutExtension)).Where(f => f.Length == fileNameWithoutExtension.Length + 5).Where(f => Regex.IsMatch(f, @"\d{4}"));//.MaxBy(f => int.Parse(f.Substring(f.Length - 4)));
             string[] allFiles = Directory.GetFiles(directory);
             if (allFiles.Length == 0) return string.Empty;
             string resultInCaseOfError = Path.Combine(directory, $"{fileNameWithoutExtension}_backup_{DateTime.Now.ToString("yyyyMMddHHmmss")}_{Guid.NewGuid()}{fileExtension}");
             IEnumerable<string> fileNamesMatchingDocumentName = allFiles.Select(f => Path.GetFileNameWithoutExtension(f)).Where(s => s.StartsWith(fileNameWithoutExtension));
             if (!fileNamesMatchingDocumentName.Any()) return resultInCaseOfError;
-            IEnumerable<string> fileNamesMatchingDocumentNameAndLength = fileNamesMatchingDocumentName.Where(f => f.Length == fileNameWithoutExtension.Length + 5);
+
+            IEnumerable<string> fileNamesMatchingDocumentNameAndLength = fileNamesMatchingDocumentName.Where(f => f.Length == fileNameWithoutExtension.Length + 5 && Regex.IsMatch(f.Substring(f.Length - 5), @"\.\d{4}"));
             string result = string.Empty;
             if (!fileNamesMatchingDocumentNameAndLength.Any())
             {
-                if (fileNamesMatchingDocumentName.Count() > 0)
-                {
-                    result = fileNamesMatchingDocumentName.FirstOrDefault(f => f == fileNameWithoutExtension);
-                    if (!string.IsNullOrEmpty(result))
-                        result += ".0000";
-                }
-                else
-                    return resultInCaseOfError;
+                result = fileNamesMatchingDocumentName.FirstOrDefault(f => f == fileNameWithoutExtension);
+                if (!string.IsNullOrEmpty(result))
+                    result += ".0000";
             }
             else
             {
-                IEnumerable<string> fileNamesMatchingDocumentNameAndLengthEndingWith0000 = fileNamesMatchingDocumentNameAndLength.Where(f => Regex.IsMatch(f, @"\d{4}"));
+                IEnumerable<string> fileNamesMatchingDocumentNameAndLengthEndingWith0000 = fileNamesMatchingDocumentNameAndLength.Where(f => Regex.IsMatch(f, @"\d{4}$"));
                 result = fileNamesMatchingDocumentNameAndLengthEndingWith0000.Aggregate((i, j) => int.Parse(i.Substring(i.Length - 4)) > int.Parse(j.Substring(j.Length - 4)) ? i : j); //.MaxBy(f => int.Parse(f.Substring(f.Length - 4))) ?? string.Empty;
             }
+
             if (!string.IsNullOrEmpty(result))
             {
                 int nextNumber = int.Parse(result.Substring(result.Length - 4)) + 1;
@@ -320,7 +316,7 @@ namespace FamilyCompactor
             }
             result = Path.Combine(directory, result + fileExtension);
             if (File.Exists(result))
-                throw new Exception(rm.GetString("ErrorCreatingBackupFile", ci));
+                throw new Exception("ErrorCreatingBackupFile");
             return result;
         }
 
